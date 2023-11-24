@@ -8,11 +8,17 @@ import { useEffect, useState } from 'react';
     }
     useEffect(() => {
       setLog((prevVal) => [...prevVal, "mounted"])
-    }, [])
-    useEffect(() => {
-      if (count % 2 === 0) {
-        setLog((prevVal) => [...prevVal, "Updated"])
+      return () => {
+        setLog(prevVal => [...prevVal, "Unmount"])
       }
+    }, [])
+    // useEffect(() => {
+    //   if (count % 2 === 0) {
+    //     setLog((prevVal) => [...prevVal, "Updated"])
+    //   }
+    // }, [count]) Просто було цікаво таке зробити
+    useEffect(() => {
+      setLog(prevVal => [...prevVal, "Updated"])
     }, [count])
     return(
       <>
@@ -62,4 +68,5 @@ export default App;
 //   ) 
 // }
 
-// export default App;
+// export default App; 
+// Інший проект
