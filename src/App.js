@@ -1,25 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
+  function App() {
+    const [count, setCount] = useState(0)
+    const [log, setLog] = useState([])
+    function changeCount() {
+      setCount(count + 1)
+    }
+    useEffect(() => {
+      setLog((prevVal) => [...prevVal, "mounted"])
+    }, [])
+    useEffect(() => {
+      if (count % 2 === 0) {
+        setLog((prevVal) => [...prevVal, "Updated"])
+      }
+    }, [count])
+    return(
+      <>
+        <span>{count}</span>
+        <button onClick={changeCount}>Click</button>
+        <div>
+          {log.map((message) => (
+            <div>
+              {message}
+              <hr/>
+            </div>
+          ))}
+        </div>
+      </>  
+    )
+  } 
 export default App;
+
+
+// import { TodoList } from './components/todolist';
+// import './App.css';
+// import { useState } from 'react';
+// import { Button } from './components/button';
+
+// function App() {
+//   const [value, setValue] = useState("")
+
+//   const [todos, setTodos] = useState([
+//     {name: "Sergio"},
+//     {name: "Alex"},
+//     {name: "Marry"}
+//   ])
+
+//   function addTodo () {
+//     setTodos((prevValue) => [...prevValue, newTodo])
+//     setValue("")
+//   }
+
+//   const newTodo = {name: value}
+
+//   return (
+//     <>
+//       <TodoList todos={todos}/>
+//       <Button addFunc={addTodo} buttonValue={"Click"} />
+//       <input value={value} onChange={(e) => setValue(e.target.value)}></input>
+//     </>
+//   ) 
+// }
+
+// export default App;
